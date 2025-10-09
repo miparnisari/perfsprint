@@ -9,13 +9,14 @@ tidy:
 	go mod tidy
 
 lint:
-	golangci-lint run
+	golangci-lint run --fix -v -c .golangci.yaml ./...
 
 test:
-	go test ./...
+	go test -race ./...
 
 bench:
-	go test -bench=Bench ./...
+	# each benchmark runs for 5 seconds, in a single CPU (to make results more consistent); report memory allocation
+	go test -bench=Bench ./... -benchtime 5s -cpu 1 -benchmem
 
 install:
 	go install .
