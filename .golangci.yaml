@@ -1,3 +1,23 @@
+version: "2"
+run:
+  allow-parallel-runners: true
 linters:
+  enable:
+    - errcheck
+    - gosec
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+  exclusions:
+    rules:
+      - linters:
+          - staticcheck
+        path: '(.+)_test\.go'
+  settings:
+    staticcheck:
+      checks:
+        - "all"
+formatters:
   enable:
     - gofmt

@@ -1,3 +1,4 @@
+// Package analyzer provides a static analysis tool that checks that fmt.Sprintf can be replaced with a faster alternative.
 package analyzer
 
 import (
@@ -105,7 +106,7 @@ func isConcatable(verb string) bool {
 	if strings.Count(verb, "%[1]s") > 1 {
 		return false
 	}
-	return (hasPrefix || hasSuffix) && !(hasPrefix && hasSuffix)
+	return (hasPrefix || hasSuffix) && !(hasPrefix && hasSuffix) //nolint:staticcheck
 }
 
 func (n *perfSprint) run(pass *analysis.Pass) (interface{}, error) {
